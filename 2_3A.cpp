@@ -47,7 +47,18 @@ TEST(CalculatorTest, PlusTest) {
 	}
 }
 
-TEST(CalculatorTest, Sample) {
+// 단위 테스트 코드의 품질
+// 1. 가독성
+// 2. 유지보수성
+// 3. 신뢰성
+
+#define SPEC printf
+
+// Test Case의 이름을 통해서 시나리오가 드러날 수 있어야 한다.
+//   ex) 테스트대상함수_시나리오_기대값
+//   ex) SPEC 매크로 함수
+TEST(CalculatorTest, Plus_2Plus2_Displays4) {
+	SPEC("2 더하기 2를 하였을 때 4가 나오는지 확인한다\n");
 	// Arrange
 	Calculator* calc = new Calculator;
 	// Act
