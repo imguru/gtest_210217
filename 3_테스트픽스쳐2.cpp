@@ -20,6 +20,10 @@ public:
 
 #include <gtest/gtest.h>
 
+// Test Suite
+//  - 동일한 픽스쳐를 가지는 테스트 케이스의 집합이다.
+
+
 #if 0
 // TEST
 TEST(SampleTest, foo) {}  // class SampleTest_foo : public testing::Test {}; 
