@@ -2,7 +2,7 @@
 
 class Calculator {
 public:
-	double Display() { return 4; }
+	double Display() { return 0; }
 
 	void Enter(double v) {}
 	void PressPlus() {}
@@ -13,7 +13,7 @@ public:
 };
 
 // 픽스쳐를 설치하는 방법 
-// 방법 3. Implicit Setup(암묵적 설치)
+// 방법 3. Implicit Setup/TearDown(암묵적 설치/해체)
 //    : 여러 테스트에서 같은 테스트 픽스쳐의 코드를 SetUp 함수에서 생성한다.
 //     => xUnit Test Framework가 제공하는 기능입니다.
 //     => 명시적인 Test Suite 클래스를 만들어야 합니다.
@@ -30,6 +30,11 @@ protected:
 		printf("SetUp()\n");
 		calc = new Calculator;
 	}
+
+	void TearDown() override {
+		printf("TearDown()\n");
+		delete calc;
+	}
 };
 
 TEST_F(CalculatorTest, PlusTest) {
@@ -43,6 +48,11 @@ TEST_F(CalculatorTest, PlusTest) {
 	} else {
 		FAIL() << "2 + 2 하였을 때 4가 나와야 합니다.";
 	}
+
+	// 아래처럼 작성할 경우, 문제가 발생할 수 있습니다. => 위의 ASSERT가 실패할 경우.
+	//  => 단언문이 실패할 경우, 이후의 코드는 더 이상 수행되지 않습니다.
+	// delete calc;
+	// printf("Delete\n");
 }
 
 #define SPEC printf
@@ -58,6 +68,8 @@ TEST_F(CalculatorTest, Plus_2Plus2_Displays4) {
 	ASSERT_EQ(calc->Display(), 4) << "2 더하기 2를 하였을 때";
 }
 
+TEST_F(CalculatorTest, Sample) {
+}
 
 
 
