@@ -50,6 +50,8 @@ TEST(CalculatorTest, PlusTest) {
 // 단위 테스트 코드의 품질
 // 1. 가독성
 // 2. 유지보수성
+//  - 테스트 코드 안에서 제어 구문의 발생을 최소화 해야 합니다.
+//   ; 조건문, 반복문, 예외 처리 구문
 // 3. 신뢰성
 
 #define SPEC printf
@@ -58,7 +60,7 @@ TEST(CalculatorTest, PlusTest) {
 //   ex) 테스트대상함수_시나리오_기대값
 //   ex) SPEC 매크로 함수
 TEST(CalculatorTest, Plus_2Plus2_Displays4) {
-	SPEC("2 더하기 2를 하였을 때 4가 나오는지 확인한다\n");
+	SPEC("> 2 더하기 2를 하였을 때 4가 나오는지 확인한다\n");
 	// Arrange
 	Calculator* calc = new Calculator;
 	// Act
@@ -66,12 +68,11 @@ TEST(CalculatorTest, Plus_2Plus2_Displays4) {
 	calc->PressPlus();
 	calc->Enter(2);
 	calc->PressEquals();
+
 	// Assert
-	if (calc->Display() == 4) {
-		SUCCEED();
-	} else {
-		FAIL() << "2 + 2 하였을 때 4가 나와야 합니다.";
-	}
+	//  xUnit Test Framework은 조건에 부합되는지 여부를 검증하기 위한 다양한 함수를 제공합니다.
+	//  => ASSERT_EQ / NE ...
+	ASSERT_EQ(calc->Display(), 4) << "2 더하기 2를 하였을 때";
 }
 
 
