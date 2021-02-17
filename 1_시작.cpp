@@ -25,23 +25,16 @@
 
 #include <gtest/gtest.h> // !!
 
-
+// 작성 중인 테스트가 아래와 같이 되어 있을 경우, 잊혀집니다.
+//  > 작성 중인 테스트는 명시적인 실패를 통해 알려야 합니다.
 TEST(SampleTestSuite, FirstTestCase) {
-
+	// FAIL();
+	// 테스트가 실패할 경우, 실패의 원인을 지정하는 것이 중요합니다.
+	
+	FAIL() << "작성 중입니다.";
 }
 
 TEST(SampleTestSuite2, FirstTestCase) {
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
