@@ -27,6 +27,19 @@ public:
 //    해결방법: 스위트 픽스쳐 설치 / 해체를 이용하면 됩니다.
 //      => xUnit Test Framework가 제공하는 기능입니다.
 
+// Suite Fixture SetUp / TearDown
+//  => 더 이상 신선한 픽스쳐의 전략을 사용할 수 없습니다.
+//     : 공유 픽스쳐 전략
+//   - TestSuite 안에 있는 모든 TestCase가 같은 픽스쳐를 공유하고 있습니다.
+//   문제점: 더 이상 TestCase는 독립적이지 않습니다.
+//           "변덕스러운 테스트" 문제가 발생할 가능성이 있습니다.
+//           테스트케이스의 신뢰성에 문제가 발생합니다.
+//    - 공유 픽스쳐의 전략을 사용할 경우, 하나의 TestSuite에 너무 많은 테스트 케이스를 두지 않는 것이 좋습니다.
+
+// DatabaseTest - 100
+//   => DatabaseTest1 - 50 - 25/25
+//      DatabaseTest2 - 50 - 25/25
+
 class DatabaseTest : public testing::Test {
 protected:
 	static Database* db;
