@@ -20,9 +20,39 @@ public:
 
 #include <gtest/gtest.h>
 
+#if 0
+// TEST
+TEST(SampleTest, foo) {}  // class SampleTest_foo : public testing::Test {}; 
+TEST(SampleTest, goo) {}  // class SampleTest_goo : public testing::Test {};
+
+            testing::Test
+                  |
+            ------------
+            |          |
+           foo        goo
+
+// TEST_F
+class SampleTest : public testing::Test {};
+TEST_F(SampleTest, foo) {}
+TEST_F(SampleTest, goo) {}
+
+           testing::Test
+                 |
+             SampleTest
+                 |
+            ------------
+            |          |
+           foo        goo
+#endif
+
+
+
+
 //  Step 1. TestSuite 클래스를 생성합니다.
 class CalculatorTest : public ::testing::Test {
-public:
+protected:
+	// Test Utility Method - Creation Method
+	//  => Google Test 에서 제공할 때에는 protected / public 으로 만들어야 합니다.
 	Calculator* Create() { return new Calculator; }
 };
 
