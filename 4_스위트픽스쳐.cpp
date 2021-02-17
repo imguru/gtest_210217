@@ -29,18 +29,31 @@ public:
 
 class DatabaseTest : public testing::Test {
 protected:
-	Database* db;
+	static Database* db;
 
-	void SetUp() override {
+	static void SetUpTestSuite() {
 		db = new Database;
 		db->Connect();
 	}
 
-	void TearDown() override {
+	static void TearDownTestSuite() {
 		db->Disconnect();
 		delete db;
 	}
+
+	void SetUp() override {
+		// db = new Database;
+		// db->Connect();
+	}
+
+	void TearDown() override {
+		// db->Disconnect();
+		// delete db;
+	}
 };
+
+// 정적 멤버 변수는 외부 정의가 필요합니다. - 소스 파일
+Database* DatabaseTest::db = nullptr;
 
 TEST_F(DatabaseTest, LoginTest) {
 	db->Login("test_id", "test_password");
