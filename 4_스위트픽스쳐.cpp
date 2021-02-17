@@ -19,6 +19,34 @@ public:
 //------
 #include <gtest/gtest.h>
 
+class DatabaseTest : public testing::Test {
+protected:
+	Database* db;
+
+	void SetUp() override {
+		db = new Database;
+		db->Connect();
+	}
+
+	void TearDown() override {
+		db->Disconnect();
+		delete db;
+	}
+};
+
+TEST_F(DatabaseTest, LoginTest) {
+	db->Login("test_id", "test_password");
+
+	ASSERT_TRUE(db->IsLogin()) << "로그인 하였을 때";
+}
+
+TEST_F(DatabaseTest, LogoutTest) {
+	db->Login("test_id", "test_password");
+	db->Logout();
+
+	ASSERT_FALSE(db->IsLogin()) << "로그아웃 하였을 때";
+}
+#if 0
 TEST(DatabaseTest, LoginTest) {
 	Database* db = new Database;
 	db->Connect();
@@ -43,6 +71,7 @@ TEST(DatabaseTest, LogoutTest) {
 	db->Disconnect();
 	delete db;
 }
+#endif
 
 
 
