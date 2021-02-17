@@ -45,9 +45,6 @@ TEST_F(SampleTest, goo) {}
            foo        goo
 #endif
 
-
-
-
 //  Step 1. TestSuite 클래스를 생성합니다.
 class CalculatorTest : public ::testing::Test {
 protected:
