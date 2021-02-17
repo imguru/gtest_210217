@@ -8,6 +8,8 @@
 // => 신선한 픽스쳐의 전략
 //   : TestSuite 객체를 한번만 생성해서 사용하는 것이 아니라,
 //     각 TestCase마다 새롭게 생성해서 사용한다.
+
+---Suite Fixture Setup
 SampleTest* ts = new SampleTest;
 ts->SetUp();
 ts->foo();
@@ -19,6 +21,7 @@ ts->SetUp();
 ts->goo();
 ts->TearDown();
 delete ts;
+---Suite Fixture TearDown
 
 #endif
 //------
@@ -26,6 +29,15 @@ class SampleTest : public testing::Test {
 protected:
 	SampleTest() { printf("SampleTest()\n"); }
 	~SampleTest() { printf("~SampleTest()\n"); }
+
+	// Suite Fixture Setup / TearDown - static
+	static void SetUpTestSuite() {
+		printf("SetUpTestSuite()\n");
+	}
+
+	static void TearDownTestSuite() {
+		printf("TearDownTestSuite()\n");
+	}
 
 	void SetUp() override {
 		printf("SetUp()\n");
