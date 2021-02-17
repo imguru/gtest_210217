@@ -23,6 +23,9 @@
 // TestCase를 만드는 방법
 // - TEST(TestSuiteName, TestCaseName)
 
+#include <gtest/gtest.h> // !!
+
+
 TEST(SampleTestSuite, FirstTestCase) {
 
 }
