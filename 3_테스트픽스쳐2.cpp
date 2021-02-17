@@ -12,19 +12,8 @@ public:
 	// Calculator(int n) {}
 };
 
-//---------
-// Test Fixture
-//  정의: xUnit Test Pattern에서는 SUT를 실행하기 위해 준비해야 하는 모든 것을 Test Fixture 라고 합니다.
-//        픽스쳐를 구성하는 모든 로직 부분을 "픽스쳐 설치(Fixture Setup)" 라고 합니다.
-
 // 픽스쳐를 설치하는 방법 
-//  1. Inline Fixture Setup
-//   : 모든 픽스쳐 설치를 테스트 함수 안에서 수행한다.
-//  
-//  장점: 픽스쳐를 설치하는 과정과 검증 로직이 테스트 함수 안에 존재하기 떄문에
-//        인과관계를 쉽게 분석할 수 있다.
-//  단점: 모든 테스트 코드 안에서 '코드 중복'이 발생한다.
-
+//  2. 
 
 #include <gtest/gtest.h>
 
