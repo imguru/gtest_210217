@@ -22,9 +22,15 @@ public:
 //  => CalculatorTest / CalculatorSpec
 
 // 3A
-// 1. Arrange: 테스트 하고자 하는 클래스의 객체를 생성하고, 필요한 경우 적절하게 설정하고 준비한다.
-// 2. Act: 객체에 작용을 가한다.
-// 3. Assert: 기대하는 바를 단언한다.
+// 1. Arrange: 테스트 하고자 하는 클래스의 객체를 생성하고, 필요한 경우 적절하게 설정하고 준비한다. - Given
+// 2. Act: 객체에 작용을 가한다. - When
+// 3. Assert: 기대하는 바를 단언한다. - Then
+
+// TDD - Test Driven Development
+// BDD - Behaviour Driven Development
+//   1) 용어 차이
+//      => "가독성": 테스트 코드를 사람의 언어와 비슷하게 만드는 것이 중요하다. - Hamcrest
+//   2) 상태 기반 검증 보다는 행위 기반 검증
 
 TEST(CalculatorTest, PlusTest) {
 	Calculator* calc = new Calculator;
@@ -41,7 +47,21 @@ TEST(CalculatorTest, PlusTest) {
 	}
 }
 
-
+TEST(CalculatorTest, Sample) {
+	// Arrange
+	Calculator* calc = new Calculator;
+	// Act
+	calc->Enter(2);
+	calc->PressPlus();
+	calc->Enter(2);
+	calc->PressEquals();
+	// Assert
+	if (calc->Display() == 4) {
+		SUCCEED();
+	} else {
+		FAIL() << "2 + 2 하였을 때 4가 나와야 합니다.";
+	}
+}
 
 
 
