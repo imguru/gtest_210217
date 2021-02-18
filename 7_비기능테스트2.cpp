@@ -22,7 +22,6 @@ public:
 
 int Image::allocCount = 0;
 
-
 void Draw() {
 	Image* p1 = new Image;
 	Image* p2 = new Image;
