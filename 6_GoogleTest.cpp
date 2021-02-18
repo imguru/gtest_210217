@@ -145,11 +145,23 @@ TEST_F(UserTest, X_Open) {}
 //   => XML
 //   ./a.out --gtest_output=[xml|json]
 
+int i = 0;
 // 추가적인 정보를 xml 또는 json에 기록하는 것이 가능합니다.
 TEST(GoogleTest, Sample7) {
 	RecordProperty("cpu", "2.5%");
 	RecordProperty("mem", "30m");
+
+	EXPECT_LE(i++, 50);
 }
+
+// 8. 반복된 테스트
+//    --gtest_repeat=N --gtest_break_on_failure --gtest_shuffle
+//    => 변덕스러운 테스트 발생 여부를 확인하기 위해 사용한다.
+
+
+
+
+
 
 
 
