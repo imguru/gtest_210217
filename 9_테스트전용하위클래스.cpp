@@ -4,9 +4,17 @@
 
 class Engine {
 public:
+	// 아래의 함수가 가상 함수 이어야 한다.
+	//  => Testability(테스트 용이성)
+	//     - 가상함수가 일반 함수보다 테스트 용이성이 좋습니다.
+	void Start() {
+		printf("Engine Start\n");
+	}
+#if 0
 	virtual void Start() {
 		printf("Engine Start\n");
 	}
+#endif
 };
 
 class Car {
@@ -16,7 +24,7 @@ public:
 
 	void Go() {
 		// ...
-		// engine->Start();
+		engine->Start();
 		// ...
 	}
 };
@@ -32,7 +40,8 @@ class TestEngine : public Engine {
 public:
 	TestEngine() : isStart(false) {}
 
-	void Start() override {
+	// void Start() override {
+	void Start() {
 		Engine::Start();     // 부모의 기능을 재사용한다.
 		isStart = true;
 	}
