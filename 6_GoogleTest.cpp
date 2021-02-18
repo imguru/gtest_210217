@@ -19,8 +19,8 @@ TEST(GoogleTest, Sample1) {
 	int expected2 = 100;
 
 	// Act
-	int actual1 = 420;
-	int actual2 = 1000;
+	int actual1 = 42;
+	int actual2 = 100;
 
 	// Assert
 	// ASSERT_EQ(expected1, actual1) << "Reason 1";  // Fail!
@@ -54,7 +54,7 @@ TEST(GoogleTest, Sample2) {
 //    EXPECT_NEAR: 오차 범위를 직접 설정하는 것이 가능합니다.
 TEST(GoogleTest, Sample3) {
 	double a = 0.7;
-	double b = 0.1 * 8;
+	double b = 0.1 * 7;
 
 	// 부동 소수점 타입은 ==을 통해 값의 같음을 비교하는 것이 어렵습니다.
 	// EXPECT_EQ(a, b);
@@ -96,9 +96,21 @@ TEST(GoogleTest, Sample4) {
 }
 #endif
 
+// 5. 테스트 비활성화
+//  => xUnit Test Framework은 테스트 비활성화 기능을 제공합니다.
+//     - 비활성화 되어 있으면, 테스트 결과에 포함되지 않지만, 비활성화되어 있다는 사실을 알려줍니다.
+//  방법: TestSuite 이름 또는 TestCase의 이름이 DISABLED_ 로 시작하면 됩니다.
 
+// 비활성화된 테스트를 동작하는 방법
+//  : ./a.out --gtest_also_run_disabled_tests
 
+TEST(GoogleTest, DISABLED_Sample5) {
+	FAIL() << "작성 중입니다.";
+}
 
+TEST(DISABLED_GoogleTest, Sample5) {
+	FAIL() << "작성 중입니다.";
+}
 
 
 
