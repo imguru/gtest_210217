@@ -5,7 +5,22 @@
 #include <iostream>
 
 class StringTest : public testing::TestWithParam<std::string> {
+public:
+	void SetUp() override {
+		printf("SetUp()\n");
+	}
 
+	void TearDown() override {
+		printf("TearDown()\n");
+	}
+
+	static void SetUpTestSuite() {
+		printf("SetUpTestSuite()\n");
+	}
+
+	static void TearDownTestSuite() {
+		printf("TearDownTestSuite()\n");
+	}
 };
 
 std::vector<std::string> LoadStrings() {
