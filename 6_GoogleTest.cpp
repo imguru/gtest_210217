@@ -63,9 +63,38 @@ TEST(GoogleTest, Sample3) {
 	EXPECT_NEAR(a, b, 0.000000001);
 }
 
+// SUT
+void OpenFile(const std::string& filename) {
+	if (filename.empty()) {
+		throw std::invalid_argument("filename should not empty!");
+	}
 
+	// ...
+}
 
+// 4. 예외 테스트
+// OpenFile에 잘못된 문자열이 전달될 경우, invalid_argument 예외가 발생하는지 검증하고 싶다.
+//  => EXPECT_THROW
+TEST(GoogleTest, Sample4) {
+	std::string badFilename = "";
 
+	EXPECT_THROW(OpenFile(badFilename), std::invalid_argument);
+}
+
+#if 0
+TEST(GoogleTest, Sample4) {
+	std::string badFilename = "";
+	
+	try {
+		OpenFile(badFilename);
+		FAIL() << "기대한 예외가 발생하지 않음";
+	} catch (std::invalid_argument&) {
+		SUCCEED();
+	} catch (...) {
+		FAIL() << "다른 종류의 예외가 발생하였음";
+	}
+}
+#endif
 
 
 
