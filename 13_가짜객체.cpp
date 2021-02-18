@@ -32,7 +32,7 @@ public:
 	UserManager(IDatabase* p) : database(p) {}
 
 	void Save(User* u) {
-		// ...
+		// ...검증해야 코드
 		// ...
 		database->SaveUser(u->GetName(), u);
 		// ...
@@ -40,6 +40,7 @@ public:
 	}
 
 	User* Load(const std::string& name) {
+		// ...검증해야 코드
 		// ...
 		// ...
 		return database->LoadUser(name);
@@ -69,6 +70,22 @@ public:
 	}
 };
 
+// EXPECT_EQ
+bool operator==(const User& lhs, const User& rhs) {
+	return lhs.GetName() == rhs.GetName() && lhs.GetAge() == rhs.GetAge();
+}
+
+// EXPECT_NE
+bool operator!=(const User& lhs, const User& rhs) {
+	return !(lhs == rhs);
+}
+
+// 오류 메세지에서 제대로 출력될 수 있도록 객체가 문자열로 표현될 수 있는 연산자 오버로딩도
+// 제공되어야 합니다.
+std::ostream& operator<<(std::ostream& os, const User& user) {
+	return os << "User(name=" << user.GetName() << ", age=" << user.GetAge() << ")";
+}
+
 TEST(UserManagerTest, Save) {
 	FakeDatabase fake;
 	UserManager manager(&fake);
@@ -80,4 +97,14 @@ TEST(UserManagerTest, Save) {
 	User* actual = manager.Load(testName);
 
 	EXPECT_EQ(*actual, expected) << "로드 하였을 때";
+	EXPECT_NE(*actual, expected) << "로드 하였을 때";
+
+	// 사용자 정의 객체에 대해서 단언 매크로를 사용하기 위해서는, 해당하는 연산자 오버로딩이 필요합니다.
+	// : ==
 }
+
+
+
+
+
+
