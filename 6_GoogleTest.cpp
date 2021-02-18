@@ -114,12 +114,32 @@ TEST(DISABLED_GoogleTest, Sample5) { // class GoogleTest_Sample5_Test : public t
 	FAIL() << "작성 중입니다.";
 }
 
-
 class DISABLED_SampleTest : public testing::Test {};
 
 TEST_F(DISABLED_SampleTest, foo) {}  // class SampleTest_foo_Test : public DISABLED_SampleTest {};
 TEST_F(DISABLED_SampleTest, goo) {}
 TEST_F(DISABLED_SampleTest, hoo) {}
+
+// 6. Test Filter
+TEST(SampleTest1, foo) {}
+TEST(SampleTest1, goo) {}
+TEST(SampleTest1, hoo) {}
+
+TEST(SampleTest2, foo) {}
+TEST(SampleTest2, goo) {}
+
+class User {
+public:
+	void Open() {}
+};
+
+class UserTest : public testing::Test {};
+
+// ./a.out --gtest_filter=UserTest.P_*
+// ./a.out --gtest_filter=*.N_*
+TEST_F(UserTest, P_Open) {}
+TEST_F(UserTest, N_Open) {}
+TEST_F(UserTest, X_Open) {}
 
 
 
