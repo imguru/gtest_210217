@@ -68,7 +68,7 @@ public:
 	}
 };
 
-
+// 제품 코드를 사용하는 방식 그대로 테스트 코드를 작성할 수 있다.
 TEST(PlayerTest, Move_TestDouble) {
 	StubConnection conn;
 	Player player(&conn);
