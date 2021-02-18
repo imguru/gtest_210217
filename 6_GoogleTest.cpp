@@ -14,7 +14,6 @@
 //   EQ / NE ...
 //   : 하나의 EXPECT문이 실패하면, 테스트의 결과는 실패한다.
 //     이후의 코드는 계속 수행된다.
-
 TEST(GoogleTest, Sample1) {
 	int expected1 = 42;
 	int expected2 = 100;
@@ -29,3 +28,35 @@ TEST(GoogleTest, Sample1) {
 	EXPECT_EQ(expected1, actual1) << "Reason 1";  // Fail!
 	EXPECT_EQ(expected2, actual2) << "Reason 2";  // Fail!
 }
+
+// 2. 문자열 비교	
+//  - const char* 기반의 문자열을 비교할 때 아래의 단언문을 사용해야 합니다.
+//  : EXPECT_STREQ/STRNE
+//    EXPECT_STRCASEEQ/STRCASENE
+TEST(GoogleTest, Sample2) {
+	std::string s1 = "hello";
+	std::string s2 = "hello";
+
+	EXPECT_EQ(s1, s2);  // ==
+
+	// C 문자열 - const char *
+	const char* s3 = s1.c_str();
+	const char* s4 = "hello";
+
+	// EXPECT_EQ(s3, s4);
+	EXPECT_STREQ(s3, s4);
+	EXPECT_STRCASEEQ(s3, s4);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
