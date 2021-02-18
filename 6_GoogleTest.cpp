@@ -48,6 +48,26 @@ TEST(GoogleTest, Sample2) {
 	EXPECT_STRCASEEQ(s3, s4);
 }
 
+// 3. 부동 소수점
+//  - EXPECT_DOUBLE_EQ/NE
+//    EXPECT_FLOAT_EQ/NE
+//    EXPECT_NEAR: 오차 범위를 직접 설정하는 것이 가능합니다.
+TEST(GoogleTest, Sample3) {
+	double a = 0.7;
+	double b = 0.1 * 8;
+
+	// 부동 소수점 타입은 ==을 통해 값의 같음을 비교하는 것이 어렵습니다.
+	// EXPECT_EQ(a, b);
+	// - https://en.wikipedia.org/wiki/Unit_in_the_last_place
+	EXPECT_DOUBLE_EQ(a, b);  // 4ULP's
+	EXPECT_NEAR(a, b, 0.000000001);
+}
+
+
+
+
+
+
 
 
 
