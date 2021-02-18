@@ -24,12 +24,29 @@ public:
 };
 
 #include <gtest/gtest.h>
+// Stub을 만들어서 아래의 테스트를 완성해주세요.
+
+class StubTime : public Time {
+public:
+	std::string GetCurrentTime() override {
+		return "00:00";
+	}
+};
 
 TEST(UserTest, Do) {
-	// Realtime time;
+	StubTime time;
 	User user(&time);
 
 	int actual = user.Do();
 
 	EXPECT_EQ(42, actual);
 }
+
+
+
+
+
+
+
+
+
