@@ -141,16 +141,15 @@ TEST_F(UserTest, P_Open) {}
 TEST_F(UserTest, N_Open) {}
 TEST_F(UserTest, X_Open) {}
 
+// 7. Test Result Formatting - xUnit Test Framework
+//   => XML
+//   ./a.out --gtest_output=[xml|json]
 
-
-
-
-
-
-
-
-
-
+// 추가적인 정보를 xml 또는 json에 기록하는 것이 가능합니다.
+TEST(GoogleTest, Sample7) {
+	RecordProperty("cpu", "2.5%");
+	RecordProperty("mem", "30m");
+}
 
 
 

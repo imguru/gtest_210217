@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="18" failures="0" disabled="5" errors="0" time="0.001" timestamp="2021-02-18T02:11:04" name="AllTests">
+  <testsuite name="GoogleTest" tests="6" failures="0" disabled="1" errors="0" time="0" timestamp="2021-02-18T02:11:04">
+    <testcase name="Sample1" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="GoogleTest" />
+    <testcase name="Sample2" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="GoogleTest" />
+    <testcase name="Sample3" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="GoogleTest" />
+    <testcase name="Sample4" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="GoogleTest" />
+    <testcase name="DISABLED_Sample5" status="notrun" result="suppressed" time="0" timestamp="1970-01-01T00:00:00" classname="GoogleTest" />
+    <testcase name="Sample7" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="GoogleTest">
+<properties>
+<property name="cpu" value="2.5%"/>
+<property name="mem" value="30m"/>
+</properties>
+    </testcase>
+  </testsuite>
+  <testsuite name="DISABLED_GoogleTest" tests="1" failures="0" disabled="1" errors="0" time="0" timestamp="1970-01-01T00:00:00">
+    <testcase name="Sample5" status="notrun" result="suppressed" time="0" timestamp="1970-01-01T00:00:00" classname="DISABLED_GoogleTest" />
+  </testsuite>
+  <testsuite name="DISABLED_SampleTest" tests="3" failures="0" disabled="3" errors="0" time="0" timestamp="1970-01-01T00:00:00">
+    <testcase name="foo" status="notrun" result="suppressed" time="0" timestamp="1970-01-01T00:00:00" classname="DISABLED_SampleTest" />
+    <testcase name="goo" status="notrun" result="suppressed" time="0" timestamp="1970-01-01T00:00:00" classname="DISABLED_SampleTest" />
+    <testcase name="hoo" status="notrun" result="suppressed" time="0" timestamp="1970-01-01T00:00:00" classname="DISABLED_SampleTest" />
+  </testsuite>
+  <testsuite name="SampleTest1" tests="3" failures="0" disabled="0" errors="0" time="0" timestamp="2021-02-18T02:11:04">
+    <testcase name="foo" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="SampleTest1" />
+    <testcase name="goo" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="SampleTest1" />
+    <testcase name="hoo" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="SampleTest1" />
+  </testsuite>
+  <testsuite name="SampleTest2" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2021-02-18T02:11:04">
+    <testcase name="foo" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="SampleTest2" />
+    <testcase name="goo" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="SampleTest2" />
+  </testsuite>
+  <testsuite name="UserTest" tests="3" failures="0" disabled="0" errors="0" time="0" timestamp="2021-02-18T02:11:04">
+    <testcase name="P_Open" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="UserTest" />
+    <testcase name="N_Open" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="UserTest" />
+    <testcase name="X_Open" status="run" result="completed" time="0" timestamp="2021-02-18T02:11:04" classname="UserTest" />
+  </testsuite>
+</testsuites>
