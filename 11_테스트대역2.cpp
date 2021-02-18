@@ -24,12 +24,11 @@
 //       : 보일러플레이트가 발생합니다.
 //       => DI 프레임워크를 사용하면, 보일러플레이트를 효과적으로 제거할 수 있습니다.
 //         Java: Dagger2
-//         C++: fruits
+//         C++: fruit
 //
 //      C* pc = new C;
 //      B* pb = new B;
 //		A* pa = new A(pb, pc);
-
 struct IFileSystem {
 	virtual bool IsValid(const std::string& filename) = 0;
 
@@ -76,7 +75,36 @@ public:
 class LoggerTest : public testing::Test {
 };
 
+// FileSystem의 역활을 대신 테스트 대역을 만들어야 합니다.
+class TestDouble : public IFileSystem {
+public:
+	bool IsValid(const std::string& filename) override {
+		return true;
+	}
+};
 
+// 파일의 이름이 5글자 이상일때 true를 반환하는지 여부를 검증한다.
+TEST_F(LoggerTest, IsValidLogFilename_NameLonggerThan5Chars_ReturnsTrue) {
+	TestDouble* td = new TestDouble;
+	Logger logger(td);
+	std::string validFilename = "valid_filename.log";
+
+	bool actual = logger.IsValidLogFilename(validFilename);
+
+	EXPECT_TRUE(actual) << "파일명이 5글자 이상일 때";
+	// EXPECT_TRUE(logger.IsValidLogFilename(validFilename)) << "파일명이 5글자 이상일 때";
+}
+
+// 파일의 이름이 5글자 미만일 때 false를 반환하는지 여부를 검증한다.
+TEST_F(LoggerTest, IsValidLogFilename_NameShorterThan5Chars_ReturnsFalse) {
+	TestDouble* td = new TestDouble;
+	Logger logger(td);
+	std::string badFilename = "bad.log";
+
+	EXPECT_FALSE(logger.IsValidLogFilename(badFilename)) << "파일명이 5글자 미만일 때";
+}
+
+#if 0
 // 파일의 이름이 5글자 이상일때 true를 반환하는지 여부를 검증한다.
 TEST_F(LoggerTest, IsValidLogFilename_NameLonggerThan5Chars_ReturnsTrue) {
 	Logger logger;
@@ -95,6 +123,7 @@ TEST_F(LoggerTest, IsValidLogFilename_NameShorterThan5Chars_ReturnsFalse) {
 
 	EXPECT_FALSE(logger.IsValidLogFilename(badFilename)) << "파일명이 5글자 미만일 때";
 }
+#endif
 
 
 
