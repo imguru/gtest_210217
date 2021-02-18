@@ -75,6 +75,7 @@ void OpenFile(const std::string& filename) {
 // 4. 예외 테스트
 // OpenFile에 잘못된 문자열이 전달될 경우, invalid_argument 예외가 발생하는지 검증하고 싶다.
 //  => EXPECT_THROW
+//     EXPECT_ANY_THROW: 예외의 종류에 상관없습니다.
 TEST(GoogleTest, Sample4) {
 	std::string badFilename = "";
 
