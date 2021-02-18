@@ -34,13 +34,55 @@ void Draw() {
 	delete p4;
 }
 
+void Draw2() {
+	Image* p1 = new Image;
+	Image* p2 = new Image;
+	Image* p3 = new Image;
+	Image* p4 = new Image;
+
+	delete p1;
+	delete p2;
+}
+
+class ImageTest : public testing::Test {
+public:
+	int alloc;
+	void SetUp() override {
+		alloc = Image::allocCount;
+	}
+
+	void TearDown() override {
+		int diff = Image::allocCount - alloc;
+		EXPECT_EQ(diff, 0) << diff << " object(s) leaks!";
+	}
+};
+
+
+TEST_F(ImageTest, Draw) {
+	Draw();
+}
+
+TEST_F(ImageTest, Draw2) {
+	Draw2();
+}
+
+#if 0
 TEST(ImageTest, Draw) {
 	int alloc = Image::allocCount;
 	Draw();
 	int diff = Image::allocCount - alloc;
-	
+
 	EXPECT_EQ(diff, 0) << diff << " object(s) leaks!";
 }
+
+TEST(ImageTest, Draw2) {
+	int alloc = Image::allocCount;
+	Draw();
+	int diff = Image::allocCount - alloc;
+
+	EXPECT_EQ(diff, 0) << diff << " object(s) leaks!";
+}
+#endif
 
 
 
