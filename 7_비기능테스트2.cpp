@@ -2,9 +2,11 @@
 
 // 1. 제품 코드의 Image 객체에 대한 new / delete 재정의 되어야 합니다.
 // 2. 테스트 코드 에서만 재정의된 new / delete를 이용합니다.
+//   => 조건부 컴파일을 활용하면 좋습니다.
 
 class Image {
 public:
+#ifdef LEAK_TEST
 	static int allocCount;
 
 	// Image* p = new Image;
@@ -18,9 +20,12 @@ public:
 		--allocCount;
 		free(p);
 	}
+#endif
 };
 
+#ifdef LEAK_TEST
 int Image::allocCount = 0;
+#endif
 
 void Draw() {
 	Image* p1 = new Image;
@@ -44,16 +49,22 @@ void Draw2() {
 	delete p2;
 }
 
+//---------
+
 class ImageTest : public testing::Test {
 public:
 	int alloc;
 	void SetUp() override {
+#ifdef LEAK_TEST
 		alloc = Image::allocCount;
+#endif
 	}
 
 	void TearDown() override {
+#ifdef LEAK_TEST
 		int diff = Image::allocCount - alloc;
 		EXPECT_EQ(diff, 0) << diff << " object(s) leaks!";
+#endif
 	}
 };
 
