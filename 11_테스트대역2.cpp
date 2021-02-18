@@ -116,6 +116,31 @@ TEST_F(LoggerTest, IsValidLogFilename_NameLonggerThan5Chars_ReturnsTrue) {
 	// EXPECT_TRUE(logger.IsValidLogFilename(validFilename)) << "파일명이 5글자 이상일 때";
 }
 
+// Unit Test
+//  - Test Double(기존의 UnitTest Framework보다 늦게 나온 용어) => Mock(모의)
+//   => xUnit Test Pattern
+
+//   Test Double을 목적과 용도에 따라서 4가지 분류
+//     1. Test Stub
+//     2. Fake Object
+//     3. Test Spy
+//     4. Mock Object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 파일의 이름이 5글자 미만일 때 false를 반환하는지 여부를 검증한다.
 TEST_F(LoggerTest, IsValidLogFilename_NameShorterThan5Chars_ReturnsFalse) {
 	Logger logger;
