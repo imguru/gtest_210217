@@ -7,7 +7,6 @@
 // 2. 스위트 픽스쳐 - TestSuite 마다 수행되는 SetUp / TearDown     => 공유 픽스쳐 전략 
 // 3. 전역 픽스쳐   - 프로그램 시작/끝에 수행되는 SetUp / TearDown 
 //                  => 프로그램을 검증하기 위해 필요한 설정 작업
-
 #include <gtest/gtest.h>
 
 TEST(SampleTest, foo) {}
@@ -33,7 +32,7 @@ public:
 //   : main 함수가 호출되기 이전에 전역 변수에 대한 초기화가 되는 것을 이용한다.
 // testing::Environment* env = testing::AddGlobalTestEnvironment(new MyTestEnvironment); 
 
-//  2) main 함수 - libgtest에 main을 포함하지 않은 경우
+//  2) main 함수 - libgtest에 main을 포함하지 않은 경우 => 권장됩니다.
 int main(int argc, char** argv) {
 	testing::InitGoogleTest(&argc, argv);
 	//----
@@ -42,14 +41,3 @@ int main(int argc, char** argv) {
 
 	return RUN_ALL_TESTS();
 }
-
-
-
-
-
-
-
-
-
-
-

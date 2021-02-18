@@ -44,6 +44,7 @@ class DatabaseTest : public testing::Test {
 protected:
 	static Database* db;
 
+#if 1 // 1.10 
 	static void SetUpTestSuite() {
 		db = new Database;
 		db->Connect();
@@ -53,6 +54,18 @@ protected:
 		db->Disconnect();
 		delete db;
 	}
+#endif
+#if 0 // 1.10 이전
+	static void SetUpTestCase() {
+		db = new Database;
+		db->Connect();
+	}
+
+	static void TearDownTestCase() {
+		db->Disconnect();
+		delete db;
+	}
+#endif
 
 	void SetUp() override {
 		// db = new Database;
