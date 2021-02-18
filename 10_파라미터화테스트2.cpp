@@ -17,7 +17,6 @@ bool IsPrime(int value) {
 //   의도: 입력 데이터를 바꿔가며, 수차례 반복 검사하는 데이터 중심 테스트에서 코드 중복을 없애는 기법.
 //   => xUnit Test Framework의 기능입니다.
 //
-// int data[] = { 2, 3, 5, 7, 11, 13, 17, 19};
 
 // 적용 방법
 // 1) Test Suite class을 명시적으로 작성해야 합니다.
@@ -32,8 +31,17 @@ class PrimeTest : public testing::TestWithParam<int> {
 
 // 2) DataSet 정의 - 전역 변수(매크로)
 // INSTANTIATE_TEST_SUITE_P(변수명, TestSuiteName, 데이터);
-INSTANTIATE_TEST_SUITE_P(primeValues, PrimeTest, testing::Values(2, 3, 5, 7, 11, 13, 17, 19));
+// INSTANTIATE_TEST_SUITE_P(primeValues, PrimeTest, testing::Values(2, 3, 5, 7, 11, 13, 17, 19));
 
+int data[] = { 2, 3, 5, 7, 11, 13, 17, 19};
+INSTANTIATE_TEST_SUITE_P(primeValues, PrimeTest, testing::ValuesIn(data));
+
+// DataSet 정의할 때 사용하는 함수
+//  1. testing::Values(2, 3, 5, ... );
+//  2. testing::ValuesIn(data);
+//  3. testing::Range(0, 10);
+//     testing::Range(0, 10, step);
+//                   => [0, 10)
 
 // 3) TestCase를 만들면 됩니다.
 //  TEST / TEST_F
