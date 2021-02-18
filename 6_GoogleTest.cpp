@@ -104,13 +104,27 @@ TEST(GoogleTest, Sample4) {
 // 비활성화된 테스트를 동작하는 방법
 //  : ./a.out --gtest_also_run_disabled_tests
 
+// : TestSuite 내의 하나의 TestCase에 대해서 비활성화하는 경우
 TEST(GoogleTest, DISABLED_Sample5) {
 	FAIL() << "작성 중입니다.";
 }
 
-TEST(DISABLED_GoogleTest, Sample5) {
+// : TestSuite 자체를 비활성화는 목적으로 사용합니다.
+TEST(DISABLED_GoogleTest, Sample5) { // class GoogleTest_Sample5_Test : public testing::Test {};
 	FAIL() << "작성 중입니다.";
 }
+
+
+class DISABLED_SampleTest : public testing::Test {};
+
+TEST_F(DISABLED_SampleTest, foo) {}  // class SampleTest_foo_Test : public DISABLED_SampleTest {};
+TEST_F(DISABLED_SampleTest, goo) {}
+TEST_F(DISABLED_SampleTest, hoo) {}
+
+
+
+
+
 
 
 
