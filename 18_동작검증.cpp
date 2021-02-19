@@ -62,11 +62,23 @@ using testing::Eq; // ==
 using testing::Ne; // !=
 using testing::Le; // <=
 using testing::Ge; // >=
+using testing::_;  // 상관없음.
 
 using testing::AllOf;  // &&
 using testing::AnyOf;  // ||
 using testing::Matcher;
 
+// Go의 호출 여부를 검증한다.
+//  첫번째 인자 - x != 0
+//  두번째 인자 - 상관없습니다.
+TEST(UserTest, Sample2) {
+	MockUser mock;
+	
+	EXPECT_CALL(mock, Go(Ne(0), _)).Times(3);
+
+	Sample2(&mock);
+}
+#if 0
 // Go의 호출 여부를 검증한다.
 //   첫번째 인자 - x >= 10 && x < 20
 //   두번째 인자 - x < 0 || x > 10
@@ -80,6 +92,8 @@ TEST(UserTest, Sample2) {
 
 	Sample2(&mock);
 }
+#endif
+
 #if 0
 // Go의 첫번째 인자는 10 이상이고, 두번째 인자는 25이하로 최대 3번 호출된다.
 TEST(UserTest, Sample2) {
