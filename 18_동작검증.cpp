@@ -49,6 +49,7 @@ TEST(UserTest, Sample1) {
 
 using testing::AtLeast;
 using testing::AtMost;
+using testing::Between;
 
 void Sample2(User* p) {
 	p->Go(10, 20);
@@ -74,7 +75,8 @@ using testing::Matcher;
 TEST(UserTest, Sample2) {
 	MockUser mock;
 	
-	EXPECT_CALL(mock, Go(Ne(0), _)).Times(3);
+	// Times를 한번만 사용해야 합니다.
+	EXPECT_CALL(mock, Go(Ne(0), _)).Times(Between(2, 5));
 
 	Sample2(&mock);
 }
