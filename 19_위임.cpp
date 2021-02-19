@@ -38,6 +38,22 @@ TEST(CalcTest, Sample) {
 	EXPECT_CALL(mock, Sub(30, 20));
 
 	Sample(&mock);
+
+}
+
+
+// 결과에 대한 제어와 행위 기반 검증을 같이 사용합니다.
+TEST(CalcTest, Sample) {
+	MockCalc mock;
+	ON_CALL(mock, Add).WillByDefault([](int a, int b) {
+		return a + b;
+	});
+	ON_CALL(mock, Sub).WillByDefault(Return(10));
+
+	EXPECT_CALL(mock, Add(10, 20));
+	EXPECT_CALL(mock, Sub(30, 20));
+
+	Sample(&mock);
 }
 
 // Test Double
