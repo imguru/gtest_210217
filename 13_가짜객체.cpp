@@ -57,6 +57,9 @@ public:
 // Fake Object Pattern
 // 의도: 아직 준비되지 않은 의존 객체로 인해서, 테스트 되지 않은 요구사항이 있다.
 // 방법: 동일한 기능을 제공하는 가벼운 테스트 대역을 만들어서 문제를 해결할 수 있다.
+//    1) 의존하는 객체가 준비되지 않았을 때
+//    2) 의존하는 객체가 사용하기 어려울 때
+//    3) 의존하는 객체가 너무 느려서, 느린 테스트의 문제가 발생할 때
 
 class FakeDatabase : public IDatabase {
 	std::map<std::string, User*> data;
