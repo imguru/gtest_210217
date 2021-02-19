@@ -21,7 +21,7 @@ public:
 
 	void Write(Level level, const std::string& message) {
 		for (auto p : targets) {
-			p->Write(level, message);
+			// p->Write(level, message);
 		}
 	}
 };
@@ -74,68 +74,17 @@ TEST(DLoggerTarget, Write) {
 //          Java: jUnit + (jMock / EasyMock / Mockito)
 //          C++: Google Mock
 
-#if 0
-class SpyTarget : public DLoggerTarget {
-	std::vector<std::string> history;
-
-	std::string Concat(Level level, const std::string& message) {
-		static const char* levelStr[] = {
-			"I", "W", "E",
-		};
-
-		return std::string(levelStr[level]) + "@" + message;
-	}
-
-public:
-	void Write(Level level, const std::string& message) override {
-		history.push_back(Concat(level, message));
-	}
-
-	// 핵심: 테스트에서 확인할 수 있도록 하는 함수를 제공해야 합니다.
-	bool IsReceived(Level level, const std::string& message) {
-		return std::find(history.begin(), history.end(), Concat(level, message)) != history.end();
-	}
-};
-
-TEST(DLoggerTarget, Write) {
-	DLogger logger;
-	SpyTarget spy1, spy2;
-	logger.AddTarget(&spy1);
-	logger.AddTarget(&spy2);
-	Level test_level = INFO;
-	std::string test_message = "test_log_message";
-
-	logger.Write(test_level, test_message);
-
-	EXPECT_TRUE(spy1.IsReceived(test_level, test_message));
-	EXPECT_TRUE(spy2.IsReceived(test_level, test_message));
-}
-#endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 테스트 대역
+//  핵심: 테스트 대역을 직접 작성하는 것 보다는 Mock Framework를 이용해서 사용하면 편리합니다.
+//
+//  정리
+//    1. Stub: 특수한 상황을 시뮬레이션 한다. 협력 객체에 대해서 원하는 결과를 주는 테스트 대역
+//    2. Fake: 의존 하는 객체가 준비되지 않거나, 사용하기 어려울 때 가벼운 테스트 대역을 만들어서
+//             테스트를 수행한다.
+//    3. Spy: 객체에 작용을 가했을 때, 관찰할 수 있는 부수효과가 없다.
+//            숨겨진 정보를 확인할 수 있는 테스트 대역을 만들어서 검증한다.
+//    4. Mock: 객체에 작용을 가했을 때, 관찰할 수 있는 부수효과가 없다.
+//            행위 기반 검증 - 함수의 호출 여부 / 호출 횟수 / 호출 순서에 대한 부분을 통해 검증한다.
+//
+//    => Google Mock을 이용하면 Stub / Fake / Mock을 다 만족할 수 있습니다.
+//      한계: Mock Object를 생성하는 Mocking 작업을 이해해야 합니다.
