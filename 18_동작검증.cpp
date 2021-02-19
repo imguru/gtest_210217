@@ -43,6 +43,9 @@ TEST(UserTest, Sample1) {
 //    
 //    AtLeast(N): 적어도 N번 이상
 //    AtMost(N): 최대 N번 이하
+//
+//  => 인자의 정보가 일치해야한다.
+//     Matcher(Hamcrest)
 
 using testing::AtLeast;
 using testing::AtMost;
@@ -50,9 +53,46 @@ using testing::AtMost;
 void Sample2(User* p) {
 	p->Go(10, 20);
 	p->Go(10, 20);
-	p->Go(10, 20);
+	p->Go(11, 21);
 }
 
+using testing::Lt; // <
+using testing::Gt; // >
+using testing::Eq; // ==
+using testing::Ne; // !=
+using testing::Le; // <=
+using testing::Ge; // >=
+
+using testing::AllOf;  // &&
+using testing::AnyOf;  // ||
+using testing::Matcher;
+
+// Go의 호출 여부를 검증한다.
+//   첫번째 인자 - x >= 10 && x < 20
+//   두번째 인자 - x < 0 || x > 10
+
+TEST(UserTest, Sample2) {
+	MockUser mock;
+	Matcher<int> firstArg = AllOf(Ge(10), Lt(20));
+	Matcher<int> secondArg = AnyOf(Lt(0), Gt(10)); 
+	
+	EXPECT_CALL(mock, Go(firstArg, secondArg)).Times(3);
+
+	Sample2(&mock);
+}
+#if 0
+// Go의 첫번째 인자는 10 이상이고, 두번째 인자는 25이하로 최대 3번 호출된다.
+TEST(UserTest, Sample2) {
+	MockUser mock;
+
+	// EXPECT_CALL(mock, Go(10, 20)).Times(3);
+	EXPECT_CALL(mock, Go(Ge(10), Le(25))).Times(AtMost(3));
+
+	Sample2(&mock);
+}
+#endif
+
+#if 0
 TEST(UserTest, Sample2) {
 	MockUser mock;
 
@@ -61,6 +101,7 @@ TEST(UserTest, Sample2) {
 
 	Sample2(&mock);
 }
+#endif
 
 
 
