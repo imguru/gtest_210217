@@ -22,6 +22,7 @@ void UseUser(User* p) {
 	//  - Mock 종류
 	//    1. Naggy Mock(기본)
 	//      : 경고가 발생한다.
+	//        NaggyMock<MockUser> mock;
 	//    2. Nice Mock
 	//      : 경고가 발생하지 않는다.
 	//        NiceMock<MockUser> mock;
@@ -33,11 +34,13 @@ void UseUser(User* p) {
 
 using testing::NiceMock;
 using testing::StrictMock;
+using testing::NaggyMock;
 
 TEST(UserTest, Say) {
 	// MockUser mock;
 	// NiceMock<MockUser> mock;
-	StrictMock<MockUser> mock;
+	// StrictMock<MockUser> mock;
+	NaggyMock<MockUser> mock;
 
 	EXPECT_CALL(mock, Say());
 
