@@ -33,6 +33,17 @@ public:
 // 1.
 #include <gmock/gmock.h>
 
+
+// gmock_gen.py 생성한 코드 - 1.10 이전
+//  : 이제는 더 이상 사용되지 않습니다.
+#if 0
+class MockDLoggerTarget : public DLoggerTarget {
+ public:
+  MOCK_METHOD2(Write,
+      void(Level level, const std::string& message));
+};
+#endif
+
 // 2. Mock Object 생성 - Mocking
 //  virtual void Write(Level level, const std::string& message) = 0;
 class MockDLoggerTarget : public DLoggerTarget {
