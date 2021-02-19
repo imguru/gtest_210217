@@ -21,7 +21,7 @@ public:
 
 	void Write(Level level, const std::string& message) {
 		for (auto p : targets) {
-			// p->Write(level, message);
+			p->Write(level, message);
 		}
 	}
 };
@@ -59,12 +59,6 @@ public:
 	MOCK_METHOD(void, Write, (Level level, const std::string& message), (override));
 };
 #endif
-
-
-
-
-
-
 
 // 3. 행위 기반 검증을 기반으로 테스트 케이스를 작성
 //  => 주의 사항
