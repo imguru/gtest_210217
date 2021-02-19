@@ -29,9 +29,71 @@ public:
 	}
 };
 
+#if 0
 int main() {
 	ConcreatePacketStream stream;
 	PacketReader<ConcreatePacketStream> reader;
 
 	reader.ReadPacket(&stream, 42);
 }
+#endif
+
+
+//--------------
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+
+#if 0
+class ConcreatePacketStream {
+public:
+	void AppendPacket(Packet* new_packet) {
+		printf("ConcreatePacketStream - AppendPacket\n");
+	}
+
+	const Packet* GetPacket(size_t packet_number) const {
+		printf("ConcreatePacketStream - GetPacket\n");
+		return nullptr;
+	}
+};
+#endif
+
+class MockPacketStream {
+public:
+	MOCK_METHOD(void, AppendPacket, (Packet* new_packet));
+	MOCK_METHOD(const Packet*, GetPacket, (size_t packet_number), (const));
+};
+
+TEST(PacketReaderTest, ReadPacket) {
+	MockPacketStream mock;
+	PacketReader<MockPacketStream> reader; // !!!!
+
+	EXPECT_CALL(mock, AppendPacket(nullptr));
+	EXPECT_CALL(mock, GetPacket(42));
+
+	reader.ReadPacket(&mock, 42);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
