@@ -40,6 +40,13 @@ TEST(UserTest, Sample1) {
 
 // 호출 횟수
 //  => EXPECT_CALL(...).Times(N);
+//    
+//    AtLeast(N): 적어도 N번 이상
+//    AtMost(N): 최대 N번 이하
+
+using testing::AtLeast;
+using testing::AtMost;
+
 void Sample2(User* p) {
 	p->Go(10, 20);
 	p->Go(10, 20);
@@ -49,7 +56,8 @@ void Sample2(User* p) {
 TEST(UserTest, Sample2) {
 	MockUser mock;
 
-	EXPECT_CALL(mock, Go(10, 20)).Times(3);
+	// EXPECT_CALL(mock, Go(10, 20)).Times(3);
+	EXPECT_CALL(mock, Go(10, 20)).Times(AtLeast(1));
 
 	Sample2(&mock);
 }
