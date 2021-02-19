@@ -22,6 +22,25 @@ public:
 	MOCK_METHOD(void, Say, (const char* message), (override));
 };
 
+//----
+struct Foo {
+	virtual ~Foo() {}
+
+	virtual void First() = 0;
+	virtual void Second() = 0;
+	virtual void Third() = 0;
+	virtual void Forth() = 0;
+};
+
+class MockFoo : public Foo {
+public:
+	MOCK_METHOD(void, First, (), (override));
+	MOCK_METHOD(void, Second, (), (override));
+	MOCK_METHOD(void, Third, (), (override));
+	MOCK_METHOD(void, Forth, (), (override));
+};
+
+
 // 호출 여부
 //  => EXPECT_CALL
 void Sample1(User* p) {
@@ -65,9 +84,14 @@ using testing::Le; // <=
 using testing::Ge; // >=
 using testing::_;  // 상관없음.
 
-using testing::AllOf;  // &&
-using testing::AnyOf;  // ||
-using testing::Matcher;
+
+// 순서 검증
+
+
+
+
+
+
 
 // Go의 호출 여부를 검증한다.
 //  첫번째 인자 - x != 0
