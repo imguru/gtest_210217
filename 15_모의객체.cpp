@@ -28,8 +28,38 @@ public:
 
 //------------------
 #include <gtest/gtest.h>
-#include <algorithm>
 
+// Google Mock
+// 1.
+#include <gmock/gmock.h>
+
+// 2. Mock Object 생성 - Mocking
+//  virtual void Write(Level level, const std::string& message) = 0;
+class MockDLoggerTarget : public DLoggerTarget {
+public:
+	// MOCK_METHOD{인자개수}(함수 이름, 함수의 타입)
+	MOCK_METHOD2(Write, void (Level level, const std::string& message));
+};
+
+// 3. 행위 기반 검증을 기반으로 테스트 케이스를 작성
+//  => 주의 사항
+//     Google Mock은 Act를 수행하기 전에 검증하고자 하는 로직을 먼저 작성해야 합니다.
+TEST(DLoggerTarget, Write) {
+	// Arrange
+	DLogger logger;
+	MockDLoggerTarget mock1, mock2;
+	logger.AddTarget(&mock1);
+	logger.AddTarget(&mock2);
+	Level test_level = INFO;
+	std::string test_message = "test_log_message";
+
+	// Assert
+	EXPECT_CALL(mock1, Write(test_level, test_message));
+	EXPECT_CALL(mock2, Write(test_level, test_message));
+
+	// Act
+	logger.Write(test_level, test_message);
+}
 // Mock Object Pattern
 // 의도: 함수를 호출하였을 때 발생하는 부수 효과 관찰할 수 없어서 테스트 되지 않은 요구사항이 존재한다.
 // 방법: 
