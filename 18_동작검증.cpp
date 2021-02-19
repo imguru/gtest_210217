@@ -85,14 +85,6 @@ using testing::Ge; // >=
 using testing::_;  // 상관없음.
 
 
-// 순서 검증
-
-
-
-
-
-
-
 // Go의 호출 여부를 검증한다.
 //  첫번째 인자 - x != 0
 //  두번째 인자 - 상관없습니다.
@@ -142,6 +134,77 @@ TEST(UserTest, Sample2) {
 	Sample2(&mock);
 }
 #endif
+
+
+// 호출 순서 검증
+//  : EXPECT_CALL은 기본적으로 순서를 판단하지 않습니다.
+//
+//  1) InSequence 객체
+//     - InSequence 객체를 생성하면, 전체적인 순서를 검증할 수 있다.
+
+using testing::InSequence;
+
+void Sample3(Foo* p) {
+	p->First();
+	p->Forth();
+	p->Third();
+	p->Second();
+}
+
+using testing::Sequence;
+//  2) Sequence 객체
+//     First ---- Second          ; s1
+//            |
+//            |
+//            --- Third - Forth   ; s2
+
+TEST(FooTest, Sample3) {
+	MockFoo mock;
+	Sequence s1, s2;
+
+	EXPECT_CALL(mock, First()).InSequence(s1, s2);
+	EXPECT_CALL(mock, Second()).InSequence(s1);
+	EXPECT_CALL(mock, Third()).InSequence(s2);
+	EXPECT_CALL(mock, Forth()).InSequence(s2);
+	
+	Sample3(&mock);
+}
+
+
+
+
+#if 0
+// First -> Second -> Third -> Forth
+TEST(FooTest, Sample3) {
+	InSequence seq;         // !!!!
+	MockFoo mock;
+
+	EXPECT_CALL(mock, First());
+	EXPECT_CALL(mock, Second());
+	EXPECT_CALL(mock, Third());
+	EXPECT_CALL(mock, Forth());
+	
+	Sample3(&mock);
+}
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
