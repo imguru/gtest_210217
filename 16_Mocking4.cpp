@@ -19,13 +19,14 @@ public:
 	}
 };
 
+// 정책 클래스를 실행 시간에 교체할 필요가 없을 경우 사용한다.
 template <typename PacketStream>
 class PacketReader {
 public:
 	void ReadPacket(PacketStream* stream, size_t packet_num) {
 		printf("PacketReader - ReadPacket\n");
 		stream->AppendPacket(nullptr);
-		stream->GetPacket(packet_num);
+		// stream->GetPacket(packet_num);
 	}
 };
 
@@ -72,28 +73,3 @@ TEST(PacketReaderTest, ReadPacket) {
 
 	reader.ReadPacket(&mock, 42);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
