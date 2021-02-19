@@ -46,11 +46,25 @@ class MockDLoggerTarget : public DLoggerTarget {
 
 // 2. Mock Object 생성 - Mocking
 //  virtual void Write(Level level, const std::string& message) = 0;
+#if 1
 class MockDLoggerTarget : public DLoggerTarget {
 public:
 	// MOCK_METHOD{인자개수}(함수 이름, 함수의 타입)
-	MOCK_METHOD2(Write, void (Level level, const std::string& message));
+	// MOCK_METHOD2(Write, void (Level level, const std::string& message));
+	
+	// void Write(Level level, const std::string& message) override {}
+	// 1.10 이후
+	// MOCK_METHOD(반환타입, 함수이름, 함수인자, 한정자);
+	
+	MOCK_METHOD(void, Write, (Level level, const std::string& message), (override));
 };
+#endif
+
+
+
+
+
+
 
 // 3. 행위 기반 검증을 기반으로 테스트 케이스를 작성
 //  => 주의 사항
