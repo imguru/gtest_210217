@@ -10,6 +10,10 @@ struct MP3 {
 	
 	virtual std::string GetName() const = 0;
 	virtual void Foo() noexcept = 0;
+
+	// 주의해야 하는 함수의 형태
+	virtual std::pair<bool, int> GetPair() = 0;
+	virtual bool CheckMap(std::map<int, double> a, bool b) = 0;
 };
 
 // Mocking
@@ -22,6 +26,10 @@ struct MP3 {
 
 class MockMP3 : public MP3 {
 public:
+	// 템플릿 인자에 ,가 존재할 경우, ()를 통해 묶어 주어야 합니다.
+	MOCK_METHOD((std::pair<bool, int>), GetPair, (), (override));
+	MOCK_METHOD(bool, CheckMap, ((std::map<int, double> a), bool b), (override));
+
 	MOCK_METHOD(std::string, GetName, (), (const, override));
 	MOCK_METHOD(void, Foo, (), (noexcept, override));
 
