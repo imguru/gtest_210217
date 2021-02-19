@@ -1,5 +1,4 @@
-// 14_스파이
-
+// 15_모의객체
 #include <string>
 #include <vector>
 
@@ -27,25 +26,25 @@ public:
 	}
 };
 
-// FileTarget t1;
-// NetworkTarget t2;
-// DLogger logger;
-// logger.AddTarget(&t1);
-// logger.AddTarget(&t2);
-//
-// logger.Write(INFO, ".");
-
-
-
-
 //------------------
 #include <gtest/gtest.h>
 #include <algorithm>
 
-// Test Spy Pattern
+// Mock Object Pattern
 // 의도: 함수를 호출하였을 때 발생하는 부수 효과 관찰할 수 없어서 테스트 되지 않은 요구사항이 존재한다.
-// 방법: 목격한 일을 기록해두었다가, 나중에 테스트에서 확인할 수 있도록 만들어진 테스트 대역
-//       "SUT 컴포넌트로부터의 간접 출력을 저장해두었다가 검증한다."
+// 방법: 
+//      Test Spy - "SUT 컴포넌트로부터의 간접 출력을 저장해두었다가 검증한다."
+//      Mock Object - 행위 기반 검증을 수행한다.
+//          상태 검증: 객체에 작용을 가한 후 내부적으로 변경된 값을 단언문을 통해 상태값을 검증한다.
+//          동작 검증: 객체에 작용을 가한 후, 내부적으로 발생하는 함수의 호출 여부, 순서, 횟수 등을 통해 검증한다.
+//			
+//     모의 객체
+//        : 내부적으로 발생한 함수의 호출 여부, 횟수, 순서 등의 정보를 기록한다.
+//        => Mock Framework을 이용해서 모의 객체를 손쉽게 생성할 수 있습니다.
+//          Java: jUnit + (jMock / EasyMock / Mockito)
+//          C++: Google Mock
+
+#if 0
 class SpyTarget : public DLoggerTarget {
 	std::vector<std::string> history;
 
@@ -81,6 +80,7 @@ TEST(DLoggerTarget, Write) {
 	EXPECT_TRUE(spy1.IsReceived(test_level, test_message));
 	EXPECT_TRUE(spy2.IsReceived(test_level, test_message));
 }
+#endif
 
 
 

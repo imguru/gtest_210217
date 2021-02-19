@@ -31,6 +31,7 @@ public:
 //   1) 용어 차이
 //      => "가독성": 테스트 코드를 사람의 언어와 비슷하게 만드는 것이 중요하다. - Hamcrest
 //   2) 상태 기반 검증 보다는 행위 기반 검증
+//      => Mock Framework을 적극적으로 활용한다.
 
 TEST(CalculatorTest, PlusTest) {
 	Calculator* calc = new Calculator;

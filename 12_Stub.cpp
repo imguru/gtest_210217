@@ -59,6 +59,7 @@ public:
 //   => "특수한 상황"을 시뮬레이션 하고 싶다.
 //     : 네트워크 오류, 시간 등의 제어가 불가능한 환경을 제어할 수 있다.
 
+// SUT를 검증하기 위해 필요한 하나의 결과를 반환한다.
 class StubConnection : public IConnection {
 public:
 	void Move(int x, int y) {
